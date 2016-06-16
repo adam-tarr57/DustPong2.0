@@ -18,7 +18,11 @@ DustPong.Preload.prototype = {
   	this.load.image('paddle', 'images/paddle.png');
     this.load.image('bg', 'images/bg.png');
     this.load.image('dustParticle', 'images/dustParticle.png');
+    this.load.image('dustParticle2', 'images/dustParticle2.png');
+    this.load.image('dustParticle3', 'images/dustParticle3.png');
+    this.load.image('dustParticle4', 'images/dustParticle4.png');
     this.load.image('iWall', 'images/iWall.png');
+    this.load.image('smoke', 'images/smoke.png');
   },
   create: function() {
   	this.state.start('MainMenu');
