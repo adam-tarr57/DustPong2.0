@@ -17,7 +17,10 @@ var scoreText;
 DustPong.Game.prototype = {
   create: function() {
   	//set world dimensions
-    this.game.world.setBounds(0, 0, 800, 600);
+    //this.game.world.setBounds(0, 0, 800, 600);
+    this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.scale.pageAlignHorizontally = true;
+    this.scale.pageAlignVertically = true;
 
     ///show the space tile, repeated
     this.background = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'bg');
@@ -29,7 +32,7 @@ DustPong.Game.prototype = {
     this.lives = 5;
 
     //Display starting lives and score text
-    this.scoreText = this.game.add.text(this.game.width-125, this.game.height-50, 'Score: 0', { font: "20px Arial", fill: "#ffffff", align: "left" });
+    this.scoreText = this.game.add.text(this.game.width-100, this.game.height-50, 'Score: 0', { font: "20px Arial", fill: "#ffffff", align: "left" });
     this.livesText = this.game.add.text(32, this.game.height-50, 'Lives: 5', { font: "20px Arial", fill: "#ffffff", align: "left" });
 
     //  Enable physics
@@ -55,15 +58,13 @@ DustPong.Game.prototype = {
     this.iWall.body.setSize(1, 600, 1, -200);
     this.iWall.body.immovable = true;
 
-    // //create dustParticle, give it random velocity and starting location
-    // this.dustParticle = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (600)), 'dustParticle');
-    // this.dustParticle.name = 'dustParticle';
-    // this.game.physics.enable(this.dustParticle);
-    // this.dustParticle.body.velocity.setTo(this.game.rnd.integerInRange(150,400)*-1), this.game.rnd.integerInRange(150,400);
-    // this.dustParticle.body.collideWorldBounds = true;
-    // this.dustParticle.body.bounce.set(1);
-
-    this.game.time.events.repeat(Phaser.Timer.SECOND * 2, 10, this.newDust(), null);
+    //create dustParticle, give it random velocity and starting location
+    this.dustParticle = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (600)), 'dustParticle');
+    this.dustParticle.name = 'dustParticle';
+    this.game.physics.enable(this.dustParticle);
+    this.dustParticle.body.velocity.setTo(this.game.rnd.integerInRange(150,400)*-1), this.game.rnd.integerInRange(150,400);
+    this.dustParticle.body.collideWorldBounds = true;
+    this.dustParticle.body.bounce.set(1);
 
   },
   update: function() {
@@ -146,13 +147,8 @@ dustKill: function(){
 
 //new dustParticle
 newDust: function(){
-    //create dustParticle, give it random velocity and starting location
-    this.dustParticle = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (600)), 'dustParticle');
-    this.dustParticle.name = 'dustParticle';
-    this.game.physics.enable(this.dustParticle);
+    this.dustParticle.reset(700, Math.floor(Math.random() * (600)));
     this.dustParticle.body.velocity.setTo(this.game.rnd.integerInRange(150,400)*-1), this.game.rnd.integerInRange(150,400);
-    this.dustParticle.body.collideWorldBounds = true;
-    this.dustParticle.body.bounce.set(1);
 },
 
 //game over, restart
