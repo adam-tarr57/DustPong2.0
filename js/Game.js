@@ -35,7 +35,7 @@ DustPong.Game.prototype = {
     this.lives = 5;
 
     //Display starting lives and score text
-    this.scoreText = this.game.add.text(this.game.width-100, this.game.height-50, 'Score: 0', { font: "20px Arial", fill: "#ffffff", align: "left" });
+    this.scoreText = this.game.add.text(this.game.width-125, this.game.height-50, 'Score: 0', { font: "20px Arial", fill: "#ffffff", align: "left" });
     this.livesText = this.game.add.text(32, this.game.height-50, 'Lives: 5', { font: "20px Arial", fill: "#ffffff", align: "left" });
 
     //  Enable physics
@@ -62,18 +62,12 @@ DustPong.Game.prototype = {
     this.iWall.body.immovable = true;
 
     //create dustParticle, give it random velocity and starting location
-    this.dustParticle = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (600)), 'dustParticle');
+    this.dustParticle = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (this.game.height)), 'dustParticle');
     this.dustParticle.name = 'dustParticle';
     this.game.physics.enable(this.dustParticle);
     this.dustParticle.body.velocity.setTo(this.game.rnd.integerInRange(150,400)*-1), this.game.rnd.integerInRange(150,400);
     this.dustParticle.body.collideWorldBounds = true;
     this.dustParticle.body.bounce.set(1);
-    // this.dustParticle.forEach(function(dust){
-    // this.addDustEmitterTrail(enemy);
-    // this.dust.events.onKilled.add(function(){
-    // this.dust.trail.kill();
-    //     });
-    // });
 
   },
   update: function() {
@@ -272,7 +266,7 @@ newDust: function(){
 
     if (this.score < 100)
     {
-        this.dustParticle.reset(700, Math.floor(Math.random() * (600)));
+        this.dustParticle.reset(this.game.width-100, Math.floor(Math.random() * (this.game.height)));
         this.dustParticle.body.velocity.setTo(this.game.rnd.integerInRange(150,400)*-1), this.game.rnd.integerInRange(150,400);
         // this.dust.trail.start(false, 800, 1);
         // this.dust.trail.x = this.dust.x-10;
@@ -280,28 +274,28 @@ newDust: function(){
     }
     else if (this.score >= 100 && this.score < 200)
     {
-        this.dustParticle2 = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (600)), 'dustParticle2');
+        this.dustParticle2 = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (this.game.height)), 'dustParticle2');
         this.dustParticle2.name = 'dustParticle2';
         this.game.physics.enable(this.dustParticle2);
-        this.dustParticle2.body.velocity.setTo(this.game.rnd.integerInRange(150,400)*-1), this.game.rnd.integerInRange(150,400);
+        this.dustParticle2.body.velocity.setTo(this.game.rnd.integerInRange(250,500)*-1), this.game.rnd.integerInRange(250,500);
         this.dustParticle2.body.collideWorldBounds = true;
         this.dustParticle2.body.bounce.set(1);
     }
     else if (this.score >= 200 && this.score < 300)
     {
-        this.dustParticle3 = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (600)), 'dustParticle3');
+        this.dustParticle3 = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (this.game.height)), 'dustParticle3');
         this.dustParticle3.name = 'dustParticle3';
         this.game.physics.enable(this.dustParticle3);
-        this.dustParticle3.body.velocity.setTo(this.game.rnd.integerInRange(150,400)*-1), this.game.rnd.integerInRange(150,400);
+        this.dustParticle3.body.velocity.setTo(this.game.rnd.integerInRange(350,600)*-1), this.game.rnd.integerInRange(350,600);
         this.dustParticle3.body.collideWorldBounds = true;
         this.dustParticle3.body.bounce.set(1);
     }
     else if (this.score >= 300)
     {
-        this.dustParticle4 = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (600)), 'dustParticle4');
+        this.dustParticle4 = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (this.game.height)), 'dustParticle4');
         this.dustParticle4.name = 'dustParticle4';
         this.game.physics.enable(this.dustParticle4);
-        this.dustParticle4.body.velocity.setTo(this.game.rnd.integerInRange(150,400)*-1), this.game.rnd.integerInRange(150,400);
+        this.dustParticle4.body.velocity.setTo(this.game.rnd.integerInRange(450,700)*-1), this.game.rnd.integerInRange(450,700);
         this.dustParticle4.body.collideWorldBounds = true;
         this.dustParticle4.body.bounce.set(1);
     }    
