@@ -32,13 +32,6 @@ DustPong.Game.prototype = {
     //give it speed in x
     this.background.autoScroll(-20, 0);
 
-    this.score = 0;
-    this.lives = 5;
-
-    //Display starting lives and score text
-    this.scoreText = this.game.add.text(this.game.width-125, this.game.height-50, 'Score: 0', { font: "20px Arial", fill: "#ffffff", align: "left" });
-    this.livesText = this.game.add.text(32, this.game.height-50, 'Lives: 5', { font: "20px Arial", fill: "#ffffff", align: "left" });
-
     //  Enable physics
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -121,6 +114,13 @@ DustPong.Game.prototype = {
     this.nextDust4At = 19000;
     this.dustDelay4 = 19000;
 
+    this.score = 0;
+    this.lives = 5;
+
+    //Display starting lives and score text
+    this.scoreText = this.game.add.text(this.game.width-125, this.game.height-50, 'Score: 0', { font: "20px Arial", fill: "#ffffff", align: "left" });
+    this.livesText = this.game.add.text(32, this.game.height-50, 'Lives: 5', { font: "20px Arial", fill: "#ffffff", align: "left" });
+
   },
   update: function() {
 
@@ -137,17 +137,6 @@ DustPong.Game.prototype = {
       this.paddle.body.velocity.y = 400;
     }
     
-    // //collision detection for paddle and iWall
-    // this.game.physics.arcade.collide(this.paddle, this.dustParticle, this.dustpaddleCollision, null, this);
-    // this.game.physics.arcade.collide(this.iWall, this.dustParticle, this.dustiWallCollision, null, this);
-    // this.game.physics.arcade.collide(this.paddle, this.dustParticle2, this.dustpaddleCollision, null, this);
-    // this.game.physics.arcade.collide(this.iWall, this.dustParticle2, this.dustiWallCollision, null, this);
-    // this.game.physics.arcade.collide(this.paddle, this.dustParticle3, this.dustpaddleCollision, null, this);
-    // this.game.physics.arcade.collide(this.iWall, this.dustParticle3, this.dustiWallCollision, null, this);
-    // this.game.physics.arcade.collide(this.paddle, this.dustParticle4, this.dustpaddleCollision, null, this);
-    // this.game.physics.arcade.collide(this.iWall, this.dustParticle4, this.dustiWallCollision, null, this);
-
-
     //collision dectection for paddle and iWall with dust groups
     this.game.physics.arcade.collide(this.paddle, this.dustPool, this.paddleCollision, null, this);
     this.game.physics.arcade.collide(this.iWall, this.dustPool, this.wallCollision, null, this);
@@ -157,8 +146,6 @@ DustPong.Game.prototype = {
     this.game.physics.arcade.collide(this.iWall, this.dustPool3, this.wallCollision3, null, this);
     this.game.physics.arcade.collide(this.paddle, this.dustPool4, this.paddleCollision4, null, this);
     this.game.physics.arcade.collide(this.iWall, this.dustPool4, this.wallCollision4, null, this);
-
-
 
     //setup to deploy dustParticles from dustPool based on how many are alive vs dead.
     if (this.nextDustAt < this.time.now && this.dustPool.countDead() > 0){
@@ -243,115 +230,13 @@ wallCollision4: function(iWall, dust){
     this.livesCheck();
 },
 
-// //collision call with paddle
-// dustpaddleCollision: function(paddle, dustParticle) {
 
-//     //destroy dustParticle instance
-//     this.dustKill();
-    
-//     //increment score and display new score
-//     this.incScore();
-
-//     //new dust instance
-//     this.newDust();
-
-// },
-
-// //collision call with iWall
-// dustiWallCollision: function(iWall, dustParticle) {
-
-//     //decrease lives, disply new lives, destroy dustParticle instance
-//     this.decLives();
-//     this.dustKill();
-
-//     //when lives = 0, gameover otherwise create new instance of dustParticle
-//     this.livesCheck();
-// },
-
-// //collision call with paddle
-// dustpaddleCollision: function(paddle, dustParticle2) {
-
-//     //destroy dustParticle instance
-//     this.dustKill();
-    
-//     //increment score and display new score
-//     this.incScore();
-
-//     //new dust instance
-//     this.newDust();
-
-// },
-
-// //collision call with iWall
-// dustiWallCollision: function(iWall, dustParticle2) {
-
-//     //decrease lives, disply new lives, destroy dustParticle instance
-//     this.decLives();
-//     this.dustKill();
-
-//     //when lives = 0, gameover otherwise create new instance of dustParticle
-//     this.livesCheck();
-// },
-
-// //collision call with paddle
-// dustpaddleCollision: function(paddle, dustParticle3) {
-
-//     //destroy dustParticle instance
-//     this.dustKill();
-    
-//     //increment score and display new score
-//     this.incScore();
-
-//     //new dust instance
-//     this.newDust();
-
-// },
-
-// //collision call with iWall
-// dustiWallCollision: function(iWall, dustParticle3) {
-
-//     //decrease lives, disply new lives, destroy dustParticle instance
-//     this.decLives();
-//     this.dustKill();
-
-//     //when lives = 0, gameover otherwise create new instance of dustParticle
-//     this.livesCheck();
-// },
-
-// //collision call with paddle
-// dustpaddleCollision: function(paddle, dustParticle4) {
-
-//     //destroy dustParticle instance
-//     this.dustKill();
-    
-//     //increment score and display new score
-//     this.incScore();
-
-//     //new dust instance
-//     this.newDust();
-
-// },
-
-// //collision call with iWall
-// dustiWallCollision: function(iWall, dustParticle4) {
-
-//     //decrease lives, disply new lives, destroy dustParticle instance
-//     this.decLives();
-//     this.dustKill();
-
-//     //when lives = 0, gameover otherwise create new instance of dustParticle
-//     this.livesCheck();
-// },
 
 //Check if lives = 0, run game over or new dust
 livesCheck: function(){
     if (this.lives === 0)
     {
         this.gameOver();
-    }
-    else
-    {
-        //this.newDust();
     }
 },
 
@@ -361,27 +246,6 @@ incScore: function(){
     this.score += 10;
     this.scoreText.text = 'Score: ' + this.score;
 
-    // if (this.score < 100)
-    // {
-    // this.score += 10;
-    // this.scoreText.text = 'Score: ' + this.score;
-    // }
-    // else if (this.score >= 100 && this.score < 200)
-    // {
-    // this.score += 20;
-    // this.scoreText.text = 'Score: ' + this.score;
-    // }
-    // else if (this.score >= 200 && this.score < 300)
-    // {
-    // this.score += 30;
-    // this.scoreText.text = 'Score: ' + this.score;
-    // }
-    // else if (this.score >= 300)
-    // {
-    // this.score += 40;
-    // this.scoreText.text = 'Score: ' + this.score;
-    // }
-
 },
 
 //decrement lives
@@ -390,68 +254,6 @@ decLives: function(){
     this.lives--;
     this.livesText.text = 'Lives: ' + this.lives;
 },
-
-// //kill dust
-// dustKill: function(){
-//     if (this.score < 100)
-//     {
-//     this.dustParticle.kill();
-//     }
-//     else if (this.score >= 100 && this.score < 200)
-//     {
-//     this.dustParticle2.kill();
-//     }
-//     else if (this.score >= 200 && this.score < 300)
-//     {
-//     this.dustParticle3.kill();
-//     }
-//     else if (this.score >= 300)
-//     {
-//     this.dustParticle4.kill();
-//     }
-// },
-
-// //new dustParticle
-// newDust: function(){
-
-//     if (this.score < 100)
-//     {
-//         this.dustParticle.reset(this.game.width-100, Math.floor(Math.random() * (this.game.height)));
-//         this.dustParticle.body.velocity.setTo(this.game.rnd.integerInRange(150,400)*-1), this.game.rnd.integerInRange(150,400);
-//         this.dustParticle.anchor.setTo(0.5, 0.5);
-
-//     }
-//     else if (this.score >= 100 && this.score < 200)
-//     {
-//         this.dustParticle2 = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (this.game.height)), 'dustParticle2');
-//         this.dustParticle2.name = 'dustParticle2';
-//         this.dustParticle2.anchor.setTo(0.5, 0.5);
-//         this.game.physics.enable(this.dustParticle2);
-//         this.dustParticle2.body.velocity.setTo(this.game.rnd.integerInRange(250,500)*-1), this.game.rnd.integerInRange(250,500);
-//         this.dustParticle2.body.collideWorldBounds = true;
-//         this.dustParticle2.body.bounce.set(1);
-//     }
-//     else if (this.score >= 200 && this.score < 300)
-//     {
-//         this.dustParticle3 = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (this.game.height)), 'dustParticle3');
-//         this.dustParticle3.name = 'dustParticle3';
-//         this.dustParticle3.anchor.setTo(0.5, 0.5);
-//         this.game.physics.enable(this.dustParticle3);
-//         this.dustParticle3.body.velocity.setTo(this.game.rnd.integerInRange(350,600)*-1), this.game.rnd.integerInRange(350,600);
-//         this.dustParticle3.body.collideWorldBounds = true;
-//         this.dustParticle3.body.bounce.set(1);
-//     }
-//     else if (this.score >= 300)
-//     {
-//         this.dustParticle4 = this.game.add.sprite(this.game.width-100, Math.floor(Math.random() * (this.game.height)), 'dustParticle4');
-//         this.dustParticle4.name = 'dustParticle4';
-//         this.dustParticle4.anchor.setTo(0.5, 0.5);
-//         this.game.physics.enable(this.dustParticle4);
-//         this.dustParticle4.body.velocity.setTo(this.game.rnd.integerInRange(450,700)*-1), this.game.rnd.integerInRange(450,700);
-//         this.dustParticle4.body.collideWorldBounds = true;
-//         this.dustParticle4.body.bounce.set(1);
-//     }    
-// },
 
 //game over, restart
 gameOver: function() {    
