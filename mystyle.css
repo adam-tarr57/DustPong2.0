@@ -1,10 +1,12 @@
 body {
     background-color: lightblue;
-    margin-right: 10px;
-    margin-left: 10px;
 }
 
 h1 {
     color: navy;
     text-align: center;
+}
+
+#game {
+	margin: 10px;
 }
