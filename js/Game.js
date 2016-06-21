@@ -236,6 +236,7 @@ wallCollision4: function(iWall, dust){
 livesCheck: function(){
     if (this.lives === 0)
     {
+        this.game.time.removeAll();
         this.gameOver();
     }
 },
