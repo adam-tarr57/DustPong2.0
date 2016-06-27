@@ -1,6 +1,12 @@
-var DustPong = DustPong || {};
+var DustPong = DustPong || {
 
-DustPong.Boot = function(){};
+BG_SCROLL_SPEED: -20,
+PADDLE_SPEED: 0,
+SPAWN_DELAY: Phaser.Timer.SECOND
+
+};
+
+DustPong.Boot = function(game){};
 
 //setting game configuration and loading the assets for the loading screen
 DustPong.Boot.prototype = {
@@ -18,11 +24,11 @@ DustPong.Boot.prototype = {
   	//loading screen will have a white background
     this.game.stage.backgroundColor = '#fff';
 	
-	//have the game centered horizontally
-	this.scale.pageAlignHorizontally = true;
+    //have the game centered horizontally
+    this.scale.pageAlignHorizontally = true;
 
-	//physics system for movement
-	this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    //physics system for movement
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
     
     this.state.start('Preload');
   }
